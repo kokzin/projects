@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background: #E8E8E8;
+  margin: 0;
+  font-size: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+}
+
+#navbar {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+
+}
+
+#navbar a {
+  float: right;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  width: 90%
+  margin-left: 5%;
+}
+
+#navbar a:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+#navbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+.hero-image{
+  background: black;
+  width: 90%
+  height: 370px;
+  margin-left: 5%;
+}
+.text-heading{
+  margin-left: 5%;
+  color: #04AA6D;;
+  font-size: 90px;
+}
+
+.text-sub-heading{
+  margin-left: 5%;
+  color: black;
+  font-size: 40px;
+}
+div.gallery {
+  border: 1px solid #ccc;
+  margin-left: 5%;
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 90%;
+  height: 700px;
+  margin-left: 5%;
+}
+
+.text-box{
+  float: left;
+  width: 170px;
+  background: black;
+  height: 800px;
+  margin: 5px;
+}
+
+.image-box{
+  float: left;
+  width: 780px;
+  height: 800px;
+  margin: 5px;
+}
+
+.img-folder{
+  width: 250px;
+  height: 350px;
+  margin: 5px;
+  float: left;
+}
+
+.img-folder h3{
+  text-align: center;
+  background: black;
+  color: white;
+  font-size: 18px;
+}
+
+.ad-box{
+  float: left;
+  width: 180px;
+  background: black;
+  height: 800px;
+  margin: 5px;
+}
+.footer{
+  float: left;
+  width: 100%;
+  background: black;
+  height: 200px;
+  margin-top: 15%;
+}
+.content {
+  padding: 16px;
+
+@media screen and (min-width: 219px) {
+  background-color: #E8E8E8;
+}
+
+
+
+@media screen and (min-width: 499px) {
+  background-color: #E8E8E8;
+}
+
+  
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class='top-image'>
+    <img src='top.png' style='width: 100%; height: 100%;'>
+  </div>
+</div>
+
+<div id="navbar">
+  <a href="javascript:void(0)">Contact</a>
+  <a href="javascript:void(0)">Videos</a>
+  <a href="javascript:void(0)">Web designs</a>
+  <a href="javascript:void(0)">Graphic designs</a>
+  <a class="active" href="javascript:void(0)">Home</a>
+</div>
+
+<div class="content">
+  <br>
+  <div class='hero-image'>
+    <img src='hero.png' style='width: 100%; height: 100%;'>
+  </div>
+  <br><hr>
+<h2 class='text-heading'>Hello there!</h2>
+
+<h4 class='text-sub-heading'>About <span style='color: #04AA6D;'>Me</span>.</h4>
+
+<div class="responsive">
+ 
+   <div class='text-box'></div>
+
+   <div class='image-box'>
+       <div class='img-folder'>
+         <img src='pic1.png'>
+	  <h3> Add some text.</h3>
+       </div>
+
+       <div class='img-folder'>
+	  <img src='pic2.png'>
+	  <h3> Add some text.</h3>
+       </div>
+
+
+       <div class='img-folder'>
+	  <img src='pic3.png'>
+	  <h3> Add some text.</h3>
+       </div>
+
+
+       <div class='img-folder'>
+	  <img src='pic4.png'>
+	  <h3> Add some text.</h3>
+       </div>
+
+       <div class='img-folder'>
+	  <img src='pic5.png'>
+	  <h3> Add some text.</h3>
+       </div>
+
+       <div class='img-folder'>
+	  <img src='pic6.png'>
+	  <h3> Add some text.</h3>
+       </div>
+
+      </div>
+
+   <div class='ad-box'>
+     <img src='kota.gif' style='width: 100%;'>
+   </div>
+
+</div>
+
+<div class="footer"></div>
+
+
+</div>
+
+</body>
+</html>
