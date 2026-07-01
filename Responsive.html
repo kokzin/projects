@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<style>
+
+/*  The full article is available on: https://mobalti.com/responsive-components-style-queries/  */
+
+
+/* Register the custom property as non-inherited by setting the `inherits` descriptor to `false` to prevent it from inheriting down the DOM tree */
+      @property --size-items {
+        syntax: "small | medium | large";
+        inherits: false;
+        initial-value: small;
+      }
+
+      /* Update the custom property based on viewport size */
+      .content {
+        @media (width >=840px) {
+          --size-items: large;
+        }
+      }
+
+      /* Wrap the component definition in a layer to ensure consumer styles always win */
+      @layer design-system-components {
+        .button {
+          /* Base/default properties (represent the small size variant) */
+          block-size: 3rem;
+          border-radius: 1rem;
+          font: 500 1rem/1.5rem system-ui;
+          gap: 0.5rem;
+          padding: 0.75rem 1.75rem;
+
+          /* Responsive variations using container style queries */
+          &:not(.small) {
+            @container style(--size-items: medium) {
+              block-size: 5rem;
+              border-radius: 1.75rem;
+              font: 400 1.5rem/2rem system-ui;
+              gap: 0.75rem;
+              padding: 1.5rem 3rem;
+            }
+
+            @container style(--size-items: large) {
+              block-size: 6.5rem;
+              border-radius: 1.75rem;
+              font: 400 2rem/2.5rem system-ui;
+              gap: 1rem;
+              padding: 2rem 4rem;
+            }
+          }
+
+          /* Modifier classes for static size instances */
+          &.medium {
+            block-size: 5rem;
+            border-radius: 1.75rem;
+            font: 400 1.5rem/2rem system-ui;
+            gap: 0.75rem;
+            padding: 1.5rem 3rem;
+          }
+
+          &.large {
+            block-size: 6.5rem;
+            border-radius: 1.75rem;
+            font: 400 2rem/2.5rem system-ui;
+            gap: 1rem;
+            padding: 2rem 4rem;
+          }
+        }
+      }
+
+      /* Support styles for the demo */
+      @layer support {
+        html {
+          color-scheme: light dark;
+        }
+
+        body {
+          display: grid;
+          place-items: center;
+          background: light-dark(oklch(99% 0 0), oklch(17% 0 0));
+        }
+
+        .content {
+          display: flex;
+          gap: 0.25rem;
+          flex-wrap: wrap;
+          align-items: center;
+          padding: 1rem;
+        }
+
+        .button {
+          --_state: none;
+          --_background: light-dark(oklch(91% 0.05 237), oklch(39% 0.1 245));
+
+          background: var(--_background);
+          color: contrast-color(var(--_background));
+          border: none;
+          display: inline-flex;
+          align-items: center;
+          cursor: pointer;
+          position: relative;
+          overflow: clip;
+          user-select: none;
+          min-inline-size: fit-content;
+          white-space: nowrap;
+
+          &:hover {
+            --_state: oklch(from currentColor l c h / 0.8%);
+          }
+
+          &:focus-visible {
+            --_state: oklch(from currentColor l c h / 0.8%);
+          }
+
+          &:active {
+            --_state: oklch(from currentColor l c h / 0.1%);
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--_state);
+          }
+        }
+      }
+
+      /* Reset */
+      @layer reset {
+        *,
+        ::before,
+        ::after {
+          box-sizing: border-box;
+        }
+
+        :where(:not(dialog)) {
+          margin: 0;
+        }
+
+        :where(html) {
+          -webkit-text-size-adjust: none;
+
+          @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+          }
+        }
+
+        :where(body) {
+          min-block-size: 100svb;
+          -webkit-font-smoothing: antialiased;
+        }
+      }
+
+</style>
+</head>
+<body>
+
+    <section class="section">
+      <div class="content">
+        <button class="button">Responsive</button>
+        <button class="button small">Fixed small</button>
+      </div>
+    </section>
+
+</body>
+</html>
+
+
