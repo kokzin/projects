@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Liquid Glass Nav</title>
+    <style>
+    /* 
+	Some base CSS styles I use for these experiments, 
+	inluding CSS variables, a reset, and base styling for 
+	many of the properties.
+*/
+@import url(https://codepen.io/HejChristian/pen/QwWeZQE.css);
+
+:root {
+    /* Flexoki Color Palette - 400 */
+  --color-red: hsl(13, 100%, 87%);
+  --color-orange: hsl(27, 98%, 84%);
+  --color-yellow: hsl(46, 83%, 80%);
+  --color-green: hsl(66, 45%, 79%);
+  --color-cyan: hsl(158, 47%, 83%);
+  --color-blue: hsl(199, 42%, 84%);
+  --color-purple: hsl(274, 27%, 88%);
+  --color-magenta: hsl(345, 88%, 90%);
+}
+
+/* Some default template overrides */
+main {
+  flex-direction: column;
+  
+  p {
+    font-size: var(--step-1);
+    max-width: 40ch;
+    width: 100%;
+  }
+  
+  hr {
+    width: 100%;
+    border-color: var(--color-accent);
+  }
+}
+
+/* Main experiment time, let's go 🥳 */
+mark {
+  --color: var(--color-purple); /* CSS variable for easy colour overrides from HTML or JS */
+  display: inline-block; /* Safeguarding against the <mark> wrapping, which currently breaks the effect a bit */
+  position: relative;
+  background-color: unset; /* Goodbye default yellow, we'll let the pseudo elements take it from here */
+  isolation: isolate;
+  
+  &::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    
+    /* Not glamorous. with some time I could probably make this nicer. */
+    /* This was mostly just manual tweaks until it looked nice (to me) */
+    width: calc(100% + 1ch);
+    left: -.25ch;
+    height: 110%;
+    top: -5%;
+    
+    /* I left these in, so you can easily play with where where the elliptical border is */
+    /* border-top-left-radius: 2px; */
+    /* border-top-right-radius: 0; */
+    border-bottom-right-radius: 20px 30px;
+    /* border-bottom-left-radius: -20px 10px; */
+
+    background-color: var(--color);
+    background-image: var(--texture-noise);
+    opacity: .75;
+    
+    box-shadow: 
+      inset -2px 0px 1px hsl(from var(--color) h s calc(l - 20)), 
+      inset -4px 0px 5px hsl(from var(--color) h s calc(l - 20));
+    
+    /* I left these in too, if you wanted it experiment with some internal or external borders - could be fun! */
+    /* border: solid 2px hsl(from var(--color) h s calc(l + 5)); */
+    /* outline: solid 1px hsl(from var(--color) h s calc(l - 20)); */
+    /* outline-offset: -1px; */
+
+    filter: url(#filter-rough);
+    z-index: -1;
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    
+    /* Again, Not glamorous CSS time. */
+    /* I was just testing out various units and sizes until it looked good (to me) */
+    height: 1ch;
+    width: .5ch;
+    top: 2px;
+    right: -.25em;
+    
+    background: 
+      radial-gradient(
+        hsl(from var(--color) h s calc(l - 30)),
+        hsl(from var(--color) h s l)
+      );
+    
+    opacity: .4;
+    border-radius: 10px 0 50px/200px 0; /* I just messed with this until it looked skewed enough */
+    rotate: 15deg; /* This could be fun to randomise via build step or JS on client side, translation too! */
+    filter: url(#filter-rough);
+    z-index: -1;
+  }
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Experiment Title & Support Check -->
+<header>
+  <h1>Nice &#60;mark&#62;</h1>
+  <p>My take on styling up &#60;mark&#62; element for some nice highlighting</p>
+</header>
+<!-- Experiment Title & Support Check -->
+
+<!-- Experiment Start -->
+<svg width="0" height="0" aria-hidden="true" style="position: absolute;">
+  <defs>
+    <filter id="filter-rough">
+      <feTurbulence type="fractalNoise" baseFrequency=".08" numOctaves="4"/>
+      <feDisplacementMap in="SourceGraphic" scale="5" />
+    </filter>
+  </defs>
+</svg>
+
+<main>
+  <p>The <mark>&#60;mark&#62;</mark> element in HTML is pretty cool as it is for highlighting stuff.</p>
+  <p>But it could be made <mark>even cooler</mark>.</p>
+  <p>Here's one in <mark style="--color: var(--color-green)">green</mark> 🤩</p>
+  <p> Any colour can be applied easily by updating the <mark style="--color: var(--color-green)">--color</mark> CSS variable.</p>
+  <p>A <mark style="--color: var(--color-red)">few</mark> more <mark style="--color: var(--color-blue)">colours</mark> just for <mark style="--color: var(--color-orange)">good</mark> measure. <mark style="--color: var(--color-magenta)">Nice 💜</mark></p>
+  <hr>
+  <p>🚨 Line wrapping breaks however, please see <strong>about</strong> to learn more.
+</main>
+<!-- Experiment End -->
+
+<!-- Lab Notes & Settings -->
+<div class="button-stack">
+  <button command="show-modal" commandfor="experimentDialog" class="experiment-notes-button">About</button>
+</div>
+
+<dialog id="experimentDialog" class="experiment-notes" closedby="any">
+  <div class="dialog-sidebar">
+    <button command="close" commandfor="experimentDialog"></button>
+    <section>
+      <article>
+        <h2>About</h2>
+        <p>The default <code>&#60;mark&#62;</code> element is ok, but I thought it could be fun to try something other than the default flat edged yellow highlighter for my upcoming website.</p>
+        <p>To help me, I used a real highlighter on a piece of paper, and then tried to replicate some of the effects I could see. This approach adds some jaggedness, and a lil extra highlight blob at the end from where you've held the pen for too long 😅</p>
+        <p>The CSS isn’t the most glamorous, I ended up doing some nudges here and there for the scaling and positioning of the psuedo <code>::before</code> and <code>::after</code> I’m using.</p>
+        <h3>Problems</h3>
+        <p>Annoyingly I did run into one right as I was about to share this 😔 Line wrapping breaks! I did try to just drop the contents of the <code>::before</code> psuedo into the main element, however the SVG filter that comes with it then applied to the text itself 😵‍💫. As a quick patch I'm keeping <code>display: inline-block</code> on it.</p>
+        <p>You could drop the SVG filter, then it should work? But for me the SVG filter is playing a big roll in getting the aesthetic I was after.</p>
+        <p>I tried a few things like a wrapping container, background-image, etc, but nothing was working and I don’t have much more energy to give it right now.</p>
+        <p>Fortunately, for me at least - I can only see myself using this on one or two words at a time; so I don’t see it being an issue. However it should be something you’re aware of should you want to use it yourself. Perhaps you can see an easy fix for it?</p>
+        <small>(If you do, please share 🥺)</small>
+      </article>
+      <article>
+        <h2>Credits</h2>
+        <ul class="credit-list">
+          <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark" target="_blank" rel="noopener noreferrer">MDN Docs - &#60;mark&#62; HTML element</a>
+            <p>Helpful documentation to check in on our old pal Mark.</p>
+          </li>
+        </ul>
+      </article>
+    </section>
+    <footer>
+      <p>June 2026, Christian Alder</p>
+      <p><a href="https://bsky.app/profile/hejchristian.com" target="_blank" rel="noopener noreferrer">Bluesky</a> | <a href="https://front-end.social/@hejchristian" target="_blank" rel="noopener noreferrer">Mastodon</a></p>
+    </footer>
+  </div>
+</dialog>
+<!-- Lab Notes & Settings -->
+
+
+    <script>
+
+// Not part of the experiment,
+// It just helps dismiss the dialog/sidebar being used for the lab notes.
+experimentDialog.addEventListener('click', ({target:dialog}) => {
+  if (dialog.nodeName === 'DIALOG') {
+    dialog.close('dismiss');
+  }
+});
+    </script>
+</body>
+</html>
