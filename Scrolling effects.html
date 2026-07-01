@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+
+:root {
+            --bg: #0b0f14;
+            --panel: rgba(255, 255, 255, 0.06);
+            --text: #e8edf2;
+            --muted: #aab9c6;
+            --brand: #7c3aed;
+            --brand2: #06b6d4;
+            --radius: 18px;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background:
+                radial-gradient(1200px 800px at 80% 10%, rgba(124, 58, 237, .25), transparent 60%),
+                radial-gradient(1000px 700px at 10% 90%, rgba(6, 182, 212, .22), transparent 55%),
+                var(--bg);
+            color: var(--text);
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+            /* Big body height for scrolling */
+            height: 600vh;
+            overflow-x: hidden;
+        }
+
+a {
+  color: #e8edf2;
+}
+
+        /* STARS ANIMATION STYLES */
+        #star-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            /* Behind content */
+            overflow: hidden;
+            /* mix-blend-mode: overlay; REMOVED to make stars white */
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
+            will-change: transform, opacity;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Demo Content Styling */
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 30%, var(--brand2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+</style>
+<body>
+
+    <div id="star-container"></div>
+
+    <div class="content">
+        <h1>Scroll Down</h1>
+        <p>Experience the warp speed star effect.</p>
+      <a href="https://www.alerak.studio">My web site</a>
+    </div>
+       <script>
+       
+               // 1. LENIS INITIALIZATION
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 2. STARS ANIMATION LOGIC
+        (function () {
+            let container = document.getElementById('star-container');
+            // If valid but empty (or just created), we populate it
+            container.innerHTML = '';
+
+            const count = 80;
+            const stars = [];
+
+            for (let i = 0; i < count; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+
+                // Random Initial Positions
+                const x = Math.random() * 100;
+                const y = Math.random() * 100; // 0-100%
+
+                // 30% chance to be completely static (distant stars)
+                const isStatic = Math.random() < 0.3;
+                const z = isStatic ? 0 : 0.2 + Math.random() * 0.6; // Speed factor (depth)
+                const size = isStatic ? 1 + Math.random() : 1 + Math.random() * 2; // Static stars smaller
+
+                s.style.left = x + '%';
+                s.style.top = y + '%';
+                s.style.width = size + 'px';
+                s.style.height = size + 'px';
+
+                // Add twinkle variation
+                s.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
+                s.style.animationDelay = (Math.random() * 5) + 's';
+
+                container.appendChild(s);
+                stars.push({ el: s, initialY: y, speed: z });
+            }
+
+            // Sync with Lenis Scroll
+            lenis.on('scroll', ({ scroll, velocity }) => {
+                // Determine stretch based on speed
+                // velocity is usually pixels per frame/tick
+                const stretch = Math.max(1, Math.min(1 + Math.abs(velocity) * 0.15, 4));
+
+                stars.forEach(star => {
+                    // Static stars don't move or stretch
+                    if (star.speed === 0) {
+                        star.el.style.transform = 'scaleY(1)';
+                        return;
+                    }
+
+                    // Calculate infinite position
+                    // We move stars UP (subtracting scroll) to simulate falling/moving forward
+                    // Factor 0.05 controls the base "speed" of the universe relative to px scroll
+                    let pos = (star.initialY - (scroll * star.speed * 0.05)) % 100;
+                    if (pos < 0) pos += 100; // Handle wrapping
+
+                    star.el.style.top = pos + '%';
+                    // Apply stretch only on Z-axis (height) for warp effect
+                    star.el.style.transform = `scaleY(${stretch})`;
+                });
+            });
+        })();
+       
+       </script>
+    
+        <!-- Lenis CDN -->
+   <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+</body>
+</html>
+
+
