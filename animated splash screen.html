@@ -1,0 +1,157 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Splash Screen</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #111827, #1e3a8a, #312e81);
+      color: white;
+      z-index: 9999;
+      animation: fadeOut 1s ease 5s forwards;
+    }
+
+    .animated-image {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      animation:
+        float 3s ease-in-out infinite,
+        glow 2s ease-in-out infinite alternate;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    }
+
+    .logo-title {
+      margin-top: 30px;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      animation: slideUp 1s ease forwards;
+    }
+
+    .loading-text {
+      margin-top: 12px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .loader {
+      width: 220px;
+      height: 5px;
+      margin-top: 25px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      width: 0;
+      background: white;
+      border-radius: 10px;
+      animation: loading 5s linear forwards;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-20px) scale(1.05);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+
+      to {
+        box-shadow: 0 0 60px rgba(96, 165, 250, 0.9);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes loading {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Splash Screen -->
+  <div class="splash-screen">
+
+    <!-- Replace this URL with your own image -->
+    <img
+      class="animated-image"
+      src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=500&q=80"
+      alt="Animated Splash Image"
+    />
+
+    <h1 class="logo-title">WELCOME</h1>
+
+    <p class="loading-text">Loading your experience...</p>
+
+    <div class="loader">
+      <div class="loader-bar"></div>
+    </div>
+
+  </div>
+
+  <!-- Your main website content -->
+  <main>
+    <h1>Your Website</h1>
+    <p>Your content starts here.</p>
+  </main>
+
+</body>
+</html>
+```
