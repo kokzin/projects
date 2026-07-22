@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display JSON Data</title>
+</head>
+<body>
+
+  <h1>JSON Data</h1>
+  <div id="output"></div>
+
+  <script>
+    // JSON data
+    const jsonData = {
+      "name": "John Doe",
+      "age": 30,
+      "city": "Cape Town"
+    };
+
+    // Display JSON data
+    document.getElementById("output").innerHTML = `
+      <p><strong>Name:</strong> ${jsonData.name}</p>
+      <p><strong>Age:</strong> ${jsonData.age}</p>
+      <p><strong>City:</strong> ${jsonData.city}</p>
+    `;
+  </script>
+
+</body>
+</html>
