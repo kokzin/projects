@@ -1,0 +1,89 @@
+{
+  "app": {
+    "name": "Kasi Food",
+    "tagline": "Taste the flavour of home"
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "All",
+      "icon": "🍽️"
+    },
+    {
+      "id": 2,
+      "name": "Burgers",
+      "icon": "🍔"
+    },
+    {
+      "id": 3,
+      "name": "Kota",
+      "icon": "🥪"
+    },
+    {
+      "id": 4,
+      "name": "Chicken",
+      "icon": "🍗"
+    },
+    {
+      "id": 5,
+      "name": "Drinks",
+      "icon": "🥤"
+    }
+  ],
+  "foods": [
+    {
+      "id": 1,
+      "name": "Classic Kota",
+      "description": "Fresh bread, chips, egg, polony, cheese and Russian sausage.",
+      "price": 45,
+      "category": "Kota",
+      "image": "images/kota.jpg",
+      "popular": true
+    },
+    {
+      "id": 2,
+      "name": "Kasi Burger",
+      "description": "Juicy beef patty with cheese, lettuce, tomato and special sauce.",
+      "price": 55,
+      "category": "Burgers",
+      "image": "images/burger.jpg",
+      "popular": true
+    },
+    {
+      "id": 3,
+      "name": "Street Chicken",
+      "description": "Crispy fried chicken served with spicy township-style sauce.",
+      "price": 40,
+      "category": "Chicken",
+      "image": "images/chicken.jpg",
+      "popular": false
+    },
+    {
+      "id": 4,
+      "name": "Chips & Russian",
+      "description": "Golden crispy chips served with Russian sausage.",
+      "price": 35,
+      "category": "Kota",
+      "image": "images/chips.jpg",
+      "popular": true
+    },
+    {
+      "id": 5,
+      "name": "Atchar Burger",
+      "description": "A delicious burger topped with spicy homemade atchar.",
+      "price": 50,
+      "category": "Burgers",
+      "image": "images/atchar-burger.jpg",
+      "popular": false
+    },
+    {
+      "id": 6,
+      "name": "Cold Drink",
+      "description": "Ice-cold refreshing drink.",
+      "price": 20,
+      "category": "Drinks",
+      "image": "images/drink.jpg",
+      "popular": false
+    }
+  ]
+}
